@@ -1,0 +1,31 @@
+<head>
+    <title>Search for a tag!</title>
+</head>
+    <body>
+        <form method="post" enctype="multipart/form-data" action="/view">
+            <label for="uSearch">Input tag name</label>
+            <input type="text" name="uSearch" required='true' /><br />
+            <input type="submit" name="searchButton" value="Search" />
+        </form>
+        {% if message %}
+            {{message}} <br>
+        {% endif %}
+    
+        {% if searchResult %}
+            {% for s in searchResult %}
+                {{s[0]}} {{s[1]}} (ID:{{s[2]}})
+                <form method="post" enctype="multipart/form-data" action="/addFriends/{{s[2]}}/">
+                    <input type="submit" name="addFriends" value="Add" />
+                </form>
+            {% endfor %}
+        {% endif %}
+    </body>
+
+    <ul>
+    <li><a href='/createAlbum'>Create an album</a> </li>
+    <li><a href='/addFriends'>Add a friend</a></li>
+    <li><a href='/upload'>Upload a photo</a> </li>
+    <li><a href='/logout'>Logout</a></li>
+    <li><a href='/'>Home</a></li>
+    </ul>
+        

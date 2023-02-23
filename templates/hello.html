@@ -1,0 +1,73 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+<title>Photoshare</title>
+{% if ownUser %}
+  {% if email %}
+    <h1>Hello {{ fname }} {{ lname }} ({{ email }})!</h1>
+    <h3>DOB: {{ dob }}; Hometown: {{ hometown }}</h3>
+  {% endif %}
+{% endif %}
+
+{% if not ownUser %}
+  {% if albums %}
+  <h2>Here are {{fname}} {{lname}}'s albums</h2>
+      <ul>
+      {% for album in albums %}
+          <a href="./{{ album[1] }}">{{album[0]}}</a></br>
+      {% endfor %}
+      </ul>
+  {% endif %}
+{% endif %}
+
+{% if ownUser %}
+  {% if albums %}
+  <h2>Here are your own albums</h2>
+      <ul>
+      {% for album in albums %}
+          <a href="./profile/{{uid}}/{{ album[1] }}">{{album[0]}}</a></br>
+      {% endfor %}
+      </ul>
+  {% endif %}
+{% endif %}
+
+
+
+{% if photos %}
+<h2>Photos in {{ aname }}</h2>
+    <ul>
+    {% for photo in photos %}
+        <li><a href="./{{ photo[1] }}">{{ photo[2] }}</a><br>
+        <img src='data:image/jpg;base64, {{ base64.b64encode(photo[0]).decode("ascii") }}'/></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if ownUser %}
+  
+  {% if friends %}
+  <h2>Friends list</h2>
+    <ul>
+      {% for friend in friends %} 
+        <a href="/profile/{{friend[0]}}">{{friend[1]}} {{friend[2]}}</a><br>
+      {% endfor %} 
+    </ul>
+  {% endif %}
+  
+{% endif %}
+
+{% if message is none %}
+  <p>You should <a href='/login'>login!</a></p>
+{% else %}
+  <p> Go to <a href='/profile'>profile?</a></p>
+{% endif %}
+
+<ul>
+<li><a href='/createAlbum'>Create an album</a> </li>
+<li><a href='/addFriends'>Add a friend</a></li>
+<li><a href='/upload'>Upload a photo</a> </li>
+<li><a href='/logout'>Logout</a></li>
+<li><a href='/'>Home</a></li>
+</ul>

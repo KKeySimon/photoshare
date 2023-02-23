@@ -1,0 +1,6 @@
+- [x] When photo uploaded, link that shows current photos is broken (remove the photos)
+- [x] Have different pages for visitor and user (profile albums)
+- [ ] Register should redirect to login
+- [ ] Question: Line 343
+- [ ] For future: May need to add ON DELETE CASCADE for tagged when picture is deleted; Q: Should tag be deleted when no photo is using it?
+- [ ] Add a homepage
